@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verify OTP</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<h2>Verify OTP</h2>
+
+<input type="text" id="otp" placeholder="Enter OTP"><br><br>
+
+<button onclick="verifyOTP()">Verify</button>
+
+<script>
+const supabase = window.supabase.createClient(
+  "https://ctpgqyofceymakikptyy.supabase.co",
+  "sb_publishable_2I0doPRyZKeSoV5MAuHA7g_VKk_ODUm"
+);
+
+const email = new URLSearchParams(window.location.search).get("email");
+
+async function verifyOTP() {
+
+const otp = document.getElementById("otp").value;
+
+const { error } = await supabase.auth.verifyOtp({
+  email: email,
+  token: otp,
+  type: "email"
+});
+
+if(error){
+  alert(error.message);
+}else{
+  alert("Registration Successful");
+  window.location.href="index.html";
+}
+}
+</script>
+
+</body>
+</html>
