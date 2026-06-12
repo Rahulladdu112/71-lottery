@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<h2>Register</h2>
+
+<input type="email" id="email" placeholder="Email"><br><br>
+
+<button onclick="sendOTP()">Send OTP</button>
+
+<script>
+const supabase = window.supabase.createClient(
+  "https://ctpgqyofceymakikptyy.supabase.co",
+  "sb_publishable_2I0doPRyZKeSoV5MAuHA7g_VKk_ODUm"
+);
+
+async function sendOTP() {
+  const email = document.getElementById("email").value;
+
+  const { error } = await supabase.auth.signInWithOtp({
+    email: email
+  });
+
+  if(error){
+    alert(error.message);
+  } else {
+    alert("OTP sent to email");
+    window.location.href="verify.html?email="+email;
+  }
+}
+</script>
+
+</body>
+</html>
