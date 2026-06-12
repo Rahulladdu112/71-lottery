@@ -3,7 +3,6 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>71 Lottery Login</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{
 margin:0;
@@ -12,63 +11,73 @@ box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 body{
-background:#0b1437;
+background:#0a0a0a;
 color:white;
 min-height:100vh;
 }
 .header{
-background:linear-gradient(90deg,#ff5f6d,#ff8a8a);
-padding:20px;
+background:linear-gradient(90deg,#6a11cb,#8e2de2);
+padding:25px;
 text-align:center;
-font-size:30px;
+font-size:34px;
 font-weight:bold;
+}
+.note{
+text-align:center;
+padding:15px;
+font-size:15px;
+color:#cfcfcf;
 }
 .container{
 width:90%;
 max-width:400px;
-margin:40px auto;
-}
-.title{
-text-align:center;
-font-size:28px;
-margin-bottom:25px;
+margin:20px auto;
 }
 input{
 width:100%;
-padding:15px;
+padding:16px;
 margin-bottom:15px;
 border:none;
 border-radius:15px;
-background:#1a254f;
+background:#1c1c1c;
 color:white;
 font-size:16px;
+outline:none;
 }
-input::placeholder{
-color:#bbb;
+.robot{
+display:flex;
+align-items:center;
+gap:10px;
+margin:15px 0;
+font-size:16px;
 }
-button{
+.robot input{
+width:20px;
+height:20px;
+margin:0;
+}
+.login-btn{
 width:100%;
-padding:15px;
+padding:16px;
 border:none;
 border-radius:30px;
-font-size:18px;
+background:linear-gradient(90deg,#6a11cb,#8e2de2);
+color:white;
+font-size:20px;
 font-weight:bold;
 cursor:pointer;
 }
-.login{
-background:linear-gradient(90deg,#ff5f6d,#ff8a8a);
-color:white;
-}
-.register{
-margin-top:10px;
+.register-btn{
+width:100%;
+padding:16px;
+margin-top:12px;
+border-radius:30px;
 background:transparent;
-border:2px solid #ff8a8a;
-color:#ff8a8a;
-}
-.footer{
-text-align:center;
-margin-top:20px;
-color:#ccc;
+border:2px solid #8e2de2;
+color:#8e2de2;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
 }
 </style>
 </head>
@@ -76,40 +85,38 @@ color:#ccc;
 <div class="header">
 71 Lottery
 </div>
+<div class="note">
+India's Largest Gaming Platform
+</div>
 <div class="container">
-<div class="title">
-Login
+<div class="robot">
+<input type="checkbox" id="robot">
+<label for="robot">I am not a robot</label>
 </div>
-<input type="email" id="email" placeholder="Enter Email">
-<input type="password" id="password" placeholder="Enter Password">
-<button class="login" onclick="loginUser()">
+<button class="login-btn" onclick="loginUser()">
 Login
 </button>
-<button class="register" onclick="window.location.href='Register.html'">
-Create Account
-</button>
-<div class="footer">
-Welcome Back
-</div>
+
+Register
 </div>
 <script>
-const supabase = window.supabase.createClient(
-"https://ctpgqyofceymakikptyy.supabase.co",
-"sb_publishable_2I0doPRyZKeSoV5MAuHA7g_VKk_ODUm"
-);
-async function loginUser(){
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
-const { error } = await supabase.auth.signInWithPassword({
-email: email,
-password: password
-});
-if(error){
-alert(error.message);
-}else{
-alert("Login Successful");
-window.location.href = "dashboard.html";
+function loginUser(){
+let username =
+document.getElementById("username").value;
+let password =
+document.getElementById("password").value;
+let robot =
+document.getElementById("robot").checked;
+if(username==="" || password===""){
+alert("Please enter username and password");
+return;
 }
+if(!robot){
+alert("Please verify that you are not a robot");
+return;
+}
+alert("Login Successful");
+window.location.href="index.html";
 }
 </script>
 </body>
