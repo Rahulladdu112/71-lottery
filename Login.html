@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>71 Lottery Login</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+body{
+background:#0b1437;
+color:white;
+min-height:100vh;
+}
+.header{
+background:linear-gradient(90deg,#ff5f6d,#ff8a8a);
+padding:20px;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+}
+.container{
+width:90%;
+max-width:400px;
+margin:40px auto;
+}
+.title{
+text-align:center;
+font-size:28px;
+margin-bottom:25px;
+}
+input{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:none;
+border-radius:15px;
+background:#1a254f;
+color:white;
+font-size:16px;
+}
+input::placeholder{
+color:#bbb;
+}
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:30px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+.login{
+background:linear-gradient(90deg,#ff5f6d,#ff8a8a);
+color:white;
+}
+.register{
+margin-top:10px;
+background:transparent;
+border:2px solid #ff8a8a;
+color:#ff8a8a;
+}
+.footer{
+text-align:center;
+margin-top:20px;
+color:#ccc;
+}
+</style>
+</head>
+<body>
+<div class="header">
+71 Lottery
+</div>
+<div class="container">
+<div class="title">
+Login
+</div>
+<input type="email" id="email" placeholder="Enter Email">
+<input type="password" id="password" placeholder="Enter Password">
+<button class="login" onclick="loginUser()">
+Login
+</button>
+<button class="register" onclick="window.location.href='Register.html'">
+Create Account
+</button>
+<div class="footer">
+Welcome Back
+</div>
+</div>
+<script>
+const supabase = window.supabase.createClient(
+"https://ctpgqyofceymakikptyy.supabase.co",
+"sb_publishable_2I0doPRyZKeSoV5MAuHA7g_VKk_ODUm"
+);
+async function loginUser(){
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+const { error } = await supabase.auth.signInWithPassword({
+email: email,
+password: password
+});
+if(error){
+alert(error.message);
+}else{
+alert("Login Successful");
+window.location.href = "dashboard.html";
+}
+}
+</script>
+</body>
+</html>
